@@ -1,0 +1,11 @@
+.gradle/
+.idea/
+gradle/
+out/
+/build/
+/.allure/
+/out/
+*.iml
+/logs/
+/target/
+environment.json
