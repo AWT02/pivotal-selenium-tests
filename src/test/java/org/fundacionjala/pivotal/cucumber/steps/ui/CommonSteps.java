@@ -1,6 +1,7 @@
 package org.fundacionjala.pivotal.cucumber.steps.ui;
 
 import cucumber.api.java.en.Given;
+import org.fundacionjala.pivotal.pages.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.fundacionjala.core.Environment;
@@ -14,6 +15,8 @@ public class CommonSteps {
     @Autowired
     private Login login;
 
+    @Autowired
+    private Project project;
     /**
      * Logs in with user.
      *
