@@ -12,7 +12,7 @@
   "url": {
     "base": "https://www.pivotaltracker.com/signin"
   },
-  "tags": "(not @wip) and @bvt",
+  "tags": " --tags ~@wip",
   "local": {
     "browser": "chrome"
   },
