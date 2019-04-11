@@ -46,8 +46,8 @@ task executeFeatures(type: Test) {
             useDefaultListeners = false
             jvmArgs = ['-Dcucumber.options= ' +
                                '--glue org.fundacionjala.pivotal.cucumber ' +
-                               '--plugin pretty '
-                               ]
+                               '--plugin pretty ' +
+                               parsedJson.tags]
         }
         testLogging.showStandardStreams = true
         scanForTestClasses = false

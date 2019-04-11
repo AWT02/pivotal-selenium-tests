@@ -101,7 +101,7 @@ public class TaskSteps {
      * After steps for every feature.
      * @param scenario Scenario
      */
-    @After
+    @After("@DeleteProject")
     public void after(final Scenario scenario) {
         LOGGER.info(String.format("@After.1 %s  Status - %s", scenario.getName(),
                 scenario.getStatus()));
