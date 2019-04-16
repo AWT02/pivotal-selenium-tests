@@ -13,7 +13,7 @@ import org.fundacionjala.core.ui.driver.DriverManager;
  */
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = {"org.fundacion-jala.pivotal.cucumber"},
+        glue = {"org.fundacionjala"},
         plugin = {"pretty"}
 )
 public class RunCucumberTest extends AbstractTestNGCucumberTests {
