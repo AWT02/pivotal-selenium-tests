@@ -2,6 +2,9 @@ package org.fundacionjala.pivotal.pages;
 
 import org.fundacionjala.core.Environment;
 import org.fundacionjala.core.ui.AbstractPage;
+import org.fundacionjala.core.ui.HtmlForms;
+import org.fundacionjala.core.ui.forms.EditProjectForm;
+import org.fundacionjala.core.ui.forms.NewProjectForm;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -139,11 +142,8 @@ public class Project extends AbstractPage {
      */
     public void createNewProject(final Map<String, String> projectElements) {
         clickCreateNewProjectButton();
-        final String theProjectName = projectElements.get("name");
-        setProjectNameTextField(theProjectName);
-        openSelectAccountCombobox();
-        selectAccount(projectElements.get("account"));
-        selectProjectPrivacy(projectElements.get("privacy"));
+        final HtmlForms newProjectForm = new NewProjectForm();
+        newProjectForm.fillForm(projectElements);
         clickCreateButton();
     }
 
@@ -261,13 +261,9 @@ public class Project extends AbstractPage {
      *
      * @param projectAttributes Attributes to set on form
      */
-    public void setValuesOnEditProjectForm(final Map<String, String> projectAttributes) {
-
-        setEditProjectTitle(projectAttributes.get("title"));
-        setEditProjectDescription(projectAttributes.get("description"));
-        setEditProjectAccount(projectAttributes.get("account"));
-        setEditProjectTaskEnable(projectAttributes.get("taskEnable"));
-        setEditProjectPrivacy(projectAttributes.get("privacy"));
+    public static void setValuesOnEditProjectForm(final Map<String, String> projectAttributes) {
+        final HtmlForms editProjectForm = new EditProjectForm();
+        editProjectForm.fillForm(projectAttributes);
     }
 
     /**
@@ -275,7 +271,7 @@ public class Project extends AbstractPage {
      *
      * @param privacy between private and public
      */
-    private void setEditProjectPrivacy(final String privacy) {
+    public void setEditProjectPrivacy(final String privacy) {
         if (editProjectPrivacy.isSelected() && "private".equals(privacy)) {
             action.click(editProjectPrivacy);
         }
@@ -286,7 +282,7 @@ public class Project extends AbstractPage {
      *
      * @param taskEnable between allow or disallow
      */
-    private void setEditProjectTaskEnable(final String taskEnable) {
+    public void setEditProjectTaskEnable(final String taskEnable) {
         if (editProjectPrivacy.isSelected() && "Enable".equals(taskEnable)) {
             action.click(editProjectEnableTask);
         }
@@ -297,7 +293,7 @@ public class Project extends AbstractPage {
      *
      * @param account account name
      */
-    private void setEditProjectAccount(final String account) {
+    public void setEditProjectAccount(final String account) {
         action.click(editAccountLink);
         action.click(editAccountComboBox);
 
@@ -308,7 +304,7 @@ public class Project extends AbstractPage {
      *
      * @param description the desired value
      */
-    private void setEditProjectDescription(final String description) {
+    public void setEditProjectDescription(final String description) {
         action.setValue(editProjectDescriptionField, description);
 
     }
@@ -318,7 +314,7 @@ public class Project extends AbstractPage {
      *
      * @param title desired title
      */
-    private void setEditProjectTitle(final String title) {
+    public void setEditProjectTitle(final String title) {
         action.setValue(editProjectNameField, title);
     }
 

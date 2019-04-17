@@ -105,7 +105,7 @@ public class ProjectSteps {
      */
     @And("change values on form as")
     public void changeValuesOnFormAs(final Map<String, String> projectAttributes) {
-        project.setValuesOnEditProjectForm(projectAttributes);
+        Project.setValuesOnEditProjectForm(projectAttributes);
         project.saveFormOnEditProject();
     }
 
