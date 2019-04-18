@@ -6,7 +6,7 @@ Feature: Story
       | name | a1 |
     And stores response as "project_response"
 
-  Scenario:
+  Scenario: Create a story
     Given logs in with user "owner1"
     And Go to Dashboard
     And opens a project "project_response.name"

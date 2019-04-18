@@ -1,9 +1,10 @@
 package org.fundacionjala.pivotal.cucumber.steps.ui;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.restassured.path.json.JsonPath;
+import org.fundacionjala.core.api.RequestManager;
 import org.fundacionjala.pivotal.pages.Dashboard;
 import org.fundacionjala.pivotal.pages.Project;
 import org.fundacionjala.pivotal.pages.Story;
@@ -30,21 +31,17 @@ public class StorySteps {
      */
     @Given("a project called {string}")
     public void aProjectCalled(final String arg0) {
-        dashboard.goToProject(arg0);
-        story.createStory("ird test");
+        this.dashboard.goToProject(arg0);
+        this.story.createStory("ird test");
     }
 
     /**
-     * @param arg0 the name of the story.
+     * @param name the name of the story.
      */
     @When("creates a story called {string}")
-    public void createsAStoryCalled(final String arg0) {
-        final String name =
-                ((JsonPath) ScenarioContext.getInstance().getContext(
-                        "project_response")).get("name").toString();
-        dashboard.goToProject(name);
-        story.createStory(arg0);
-        ScenarioContext.getInstance().setContext("story_name", arg0);
+    public void createsAStoryCalled(final String name) {
+        this.story.createStory(name);
+        ScenarioContext.getInstance().setContext("story_name", name);
     }
 
     /**
@@ -61,6 +58,11 @@ public class StorySteps {
      */
     @When("creates other a story called {string}")
     public void createsOtherAStoryCalled(final String arg1) {
-        story.createStory(arg1);
+        this.story.createStory(arg1);
+    }
+
+    @After
+    public void after() {
+        RequestManager.deleteRequest("/projects/{project_response.id}");
     }
 }
