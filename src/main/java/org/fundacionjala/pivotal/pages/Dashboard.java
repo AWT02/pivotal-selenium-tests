@@ -58,6 +58,9 @@ public class Dashboard extends AbstractPage {
     @FindBy(css = "#twitter_link")
     private WebElement twitterLink;
 
+    @FindBy(css = "#projects-search-bar")
+    private WebElement searchInput;
+
     /** Create project. **/
     public void createProjectButton() {
         this.action.click(this.createProject);
@@ -142,19 +145,16 @@ public class Dashboard extends AbstractPage {
      * @param name string project name.
      */
     public void goToProject(final String name) {
-        this.action.scrollToElement(this.twitterLink);
+        this.searchInput.sendKeys(name);
         try {
-            if (this.showMoreProjects.isDisplayed()) {
-                this.showMoreProjects.click();
-                this.wait.wait(WAIT_TIME);
-            }
+            this.action.scrollToElement(this.twitterLink);
             final WebElement project =
                     getElementWithName(this.projectNames, name);
             this.action.click(project);
+            this.action.waitPresenceOfElement(
+                    By.xpath("a[data-aid='navTab-stories']"));
         } catch (final NoSuchElementException e) {
             LOGGER.warn("The Project web element was not find ", e);
-        } catch (final InterruptedException e) {
-            LOGGER.warn("Dashboard page can't wait ", e);
         }
     }
 

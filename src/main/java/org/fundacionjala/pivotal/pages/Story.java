@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 /**
@@ -15,13 +16,13 @@ public class Story extends AbstractPage {
     /**
      * This is the add story button.
      */
-    @FindBy(css = "span[class='tracker_markup']")
+    @FindBy(xpath = "span[class='tracker_markup']")
     private List<WebElement> storyNames;
 
     /**
      * This is the add story button.
      */
-    @FindBy(css = "a[data-aid='AddButton']")
+    @FindBy(xpath = "a[data-aid='AddButton']")
     private WebElement addStoryButton;
     /**
      * This is the save button.
@@ -39,7 +40,7 @@ public class Story extends AbstractPage {
      * This is the story page.
      */
     //@FindBy(name = "story[name]")
-    @FindBy(css = "textarea[name='story[name]']")
+    @FindBy(xpath = "textarea[name='story[name]']")
     private WebElement storyName;
     /**
      * another locators for non required fields.
@@ -116,6 +117,7 @@ public class Story extends AbstractPage {
 
     /**
      * this is an interesting method.
+     *
      * @param text texto.
      * @return boolean true or false
      */
