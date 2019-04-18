@@ -52,7 +52,7 @@ public class Dashboard extends AbstractPage {
     @FindBy(css = ".projectTileHeader__projectName")
     private List<WebElement> projectNames;
 
-    @FindBy(xpath = "button[data-aid='show-more-projects-button']")
+    @FindBy(css = "button[data-aid='show-more-projects-button']")
     private WebElement showMoreProjects;
 
     @FindBy(css = "#twitter_link")
@@ -152,7 +152,7 @@ public class Dashboard extends AbstractPage {
                     getElementWithName(this.projectNames, name);
             this.action.click(project);
             this.action.waitPresenceOfElement(
-                    By.xpath("a[data-aid='navTab-stories']"));
+                    By.cssSelector("a[data-aid='navTab-stories']"));
         } catch (final NoSuchElementException e) {
             LOGGER.warn("The Project web element was not find ", e);
         }

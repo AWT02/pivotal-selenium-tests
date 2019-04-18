@@ -22,7 +22,7 @@ public class Story extends AbstractPage {
     /**
      * This is the add story button.
      */
-    @FindBy(xpath = "a[data-aid='AddButton']")
+    @FindBy(css = "a[data-aid='AddButton']")
     private WebElement addStoryButton;
     /**
      * This is the save button.
@@ -40,7 +40,7 @@ public class Story extends AbstractPage {
      * This is the story page.
      */
     //@FindBy(name = "story[name]")
-    @FindBy(xpath = "textarea[name='story[name]']")
+    @FindBy(css = "textarea[name='story[name]']")
     private WebElement storyName;
     /**
      * another locators for non required fields.
