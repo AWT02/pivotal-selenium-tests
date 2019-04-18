@@ -16,7 +16,7 @@ public class Story extends AbstractPage {
     /**
      * This is the add story button.
      */
-    @FindBy(xpath = "span[class='tracker_markup']")
+    @FindBy(css = "span[class='tracker_markup']")
     private List<WebElement> storyNames;
 
     /**
