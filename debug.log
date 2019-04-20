@@ -1,0 +1,3 @@
+[0409/205323.923:ERROR:file_io_win.cc(161)] CreateFile C:\Users\Usuario\AppData\Local\Temp\scoped_dir5860_5456\Crashpad\settings.dat: El sistema no puede encontrar la ruta especificada. (0x3)
+[0409/205323.934:ERROR:file_io_win.cc(170)] CreateFile C:\Users\Usuario\AppData\Local\Temp\scoped_dir5860_5456\Crashpad\reports\acf23f31-6484-4234-ae98-7f18872f1d87.dmp: El sistema no puede encontrar la ruta especificada. (0x3)
+[0409/205323.934:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed

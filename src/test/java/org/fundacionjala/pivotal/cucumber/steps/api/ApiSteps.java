@@ -28,7 +28,33 @@ public class ApiSteps {
     public void sendsAPOSTRequest(final String endpoint,
                                   final Map<String, String> param) {
         final String builtEndpoint = StringUtil.getExplicitEndpoint(endpoint);
-        resp = RequestManager.postRequest(builtEndpoint, param);
+        this.resp = RequestManager.postRequest(builtEndpoint, param);
+    }
+
+    /**
+     * This is a generic API PUT method.
+     *
+     * @param endpoint is the strings that is needed to complete the url for the
+     *                 endpoint.
+     * @param param    is the attributes read on the feature
+     *                 file.
+     */
+    @And("sends a PUT request {string}")
+    public void sendsAPUTRequest(final String endpoint,
+                                 final Map<String, String> param) {
+        final String builtEndpoint = StringUtil.getExplicitEndpoint(endpoint);
+        this.resp = RequestManager.putRequest(builtEndpoint, param);
+    }
+
+    /**
+     * This step gets an specified project.
+     *
+     * @param endpoint end point bareURl
+     */
+    @And("sends a GET request {string}")
+    public void sendsAGETRequest(final String endpoint) {
+        final String url = StringUtil.getExplicitEndpoint(endpoint);
+        this.resp = RequestManager.getRequest(url);
     }
 
     /**
@@ -36,10 +62,10 @@ public class ApiSteps {
      *
      * @param arg0 end point bareURl
      */
-    @And("send a DELETE request {string}")
+    @And("sends a DELETE request {string}")
     public void sendADELETERequest(final String arg0) {
         final String url = StringUtil.getExplicitEndpoint(arg0);
-        resp = RequestManager.deleteRequest(url);
+        this.resp = RequestManager.deleteRequest(url);
     }
 
     /**
@@ -49,6 +75,6 @@ public class ApiSteps {
      */
     @And("stores response as {string}")
     public void storesResponseAs(final String keyContext) {
-        ScenarioContext.getInstance().setContext(keyContext, resp);
+        ScenarioContext.getInstance().setContext(keyContext, this.resp);
     }
 }

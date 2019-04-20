@@ -9,15 +9,28 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * This is the story page.
+ * This is the story page with all the locators.
  */
 @Component
 public class Story extends AbstractPage {
+
+    /**
+     * This is the delete story button.
+     */
+    @FindBy(css = "button[title='Delete this story']")
+    private WebElement deleteStoryButton;
     /**
      * This is the add story button.
      */
     @FindBy(css = "span[class='tracker_markup']")
     private List<WebElement> storyNames;
+    /**
+     * This is a list of the story checkboxes.
+     * The ones that we are going to use for delete stories.
+     */
+    @FindBy(css = "a[title='Select this story for bulk actions']")
+    private List<WebElement> storyCheckBoxes;
+
 
     /**
      * This is the add story button.
@@ -90,6 +103,11 @@ public class Story extends AbstractPage {
 
     /**
      * Basic method with the minimum requerid for create a story.
+     */
+
+
+    /**
+     * Basic method with the minimum requerid for create a story.
      *
      * @param strStoryName of the story that you want to create
      */
@@ -130,4 +148,12 @@ public class Story extends AbstractPage {
         return false;
     }
 
+
+    /**
+     * click delete button.
+     */
+    public void clickDeleteButton() {
+        this.action.click(this.deleteStoryButton);
+
+    }
 }
