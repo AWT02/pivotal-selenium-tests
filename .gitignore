@@ -9,3 +9,4 @@ out/
 /logs/
 /target/
 environment.json
+*.log
