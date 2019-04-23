@@ -9,7 +9,8 @@ Feature: Deletion of workspaces
 
   Scenario: Workspace can be deleted from projects section.
 
-    Given the settings "workspace_response.name" page from projects section
+    Given the settings workspace page from projects section
+      | title | workspace_response.name |
     When the user clicks on delete this workspace link
     Then validate deletion on workspace dashboard
     And validate deletion on header workspaces list
@@ -17,7 +18,8 @@ Feature: Deletion of workspaces
 
   Scenario: Workspace can be deleted from its dashboard.
 
-    Given the settings "workspace_response.name" page from its dashboard
+    Given the settings workspace page from its dashboard
+      | title | workspace_response.name |
     When the user clicks on delete this workspace link
     Then validate deletion on workspace dashboard
     And validate deletion on header workspaces list
