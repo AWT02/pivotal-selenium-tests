@@ -8,13 +8,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/** Header page. **/
+/**
+ * Header page.
+ **/
 @Component
 public class Header extends AbstractPage {
     @FindBy(css = ".tc_header_item tc_header_logo")
     private WebElement goDashboard;
 
-    @FindBy(css = ".tc_projects_dropdown_link tc_context_name")
+    @FindBy(css = ".tc_projects_dropdown_link.tc_context_name")
     private WebElement projecMenu;
 
     @FindBy(css = ".Dropdown__button _2Oy9G__NotificationsBell__button")
@@ -26,6 +28,9 @@ public class Header extends AbstractPage {
     @FindBy(css = ".div[data-aid='ProductUpdatesDropdown__indicator--newHeader'] .zWDds__Button")
     private WebElement whatsNew;
 
+    @FindBy(css = "a[data-aid='CreateProject']")
+    private WebElement createProjectLink;
+
     /**
      * Go to dashboard page.
      *
@@ -36,22 +41,32 @@ public class Header extends AbstractPage {
         return new Dashboard();
     }
 
-    /** This method open project menu. */
+    /**
+     * This method open project menu.
+     */
     public void openProjectMenu() {
+        this.action.pause();
+        this.action.waitVisibility(this.projecMenu);
         this.action.click(this.projecMenu);
     }
 
-    /** This method open profile. */
+    /**
+     * This method open profile.
+     */
     public void openProfile() {
         this.action.click(this.profile);
     }
 
-    /** This method open whats new. */
+    /**
+     * This method open whats new.
+     */
     public void openWhatsNew() {
         this.action.click(this.whatsNew);
     }
 
-    /** This method open help. */
+    /**
+     * This method open help.
+     */
     public void openHelp() {
         final List<WebElement> buttons = this.driver.findElements(By.cssSelector(
                 ".zWDds__Button.TtSTu__Button--header.Dropdown__button"));
@@ -61,5 +76,12 @@ public class Header extends AbstractPage {
                 return;
             }
         }
+    }
+
+    /**
+     * Option over header menu.
+     */
+    public void clickCreateNewProject() {
+        this.action.click(this.createProjectLink);
     }
 }
