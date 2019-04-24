@@ -1,3 +1,4 @@
+@wip
 Feature: Deletion of workspaces
 
   Background:

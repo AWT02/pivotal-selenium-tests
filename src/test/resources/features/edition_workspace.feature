@@ -1,3 +1,4 @@
+@wip
 Feature: edition of workspaces
 
   Background:
