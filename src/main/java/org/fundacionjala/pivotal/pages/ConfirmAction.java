@@ -23,6 +23,12 @@ public class ConfirmAction extends AbstractPage {
     @FindBy(css = "#confirm_archive")
     private WebElement confirmArchive;
 
+    @FindBy(css = ".SMkCk__Button.SSqkh__Button--warning")
+    private WebElement confirmDeleteStory;
+
+    @FindBy(css = ".SMkCk__Button.ibMWB__Button--open")
+    private WebElement cancelDeleteStory;
+
     /**
      * Delete through link option.
      */
@@ -51,6 +57,21 @@ public class ConfirmAction extends AbstractPage {
      */
     public void clickOnArchiveButton() {
         action.click(confirmArchive);
+    }
+
+
+    /**
+     * Confirm delete Story.
+     */
+    public void confirmDeleteStoryButton() {
+        action.click(confirmDeleteStory);
+    }
+
+    /**
+     * Cancel delete Story.
+     */
+    public void cancelDeleteStoryButton() {
+        action.click(cancelDeleteStory);
     }
 
 
