@@ -7,6 +7,7 @@ Feature: edition of workspaces
     And stores response as "workspace_response"
     And logs in with user "owner1"
     And Go to Dashboard
+      | tab | workspace |
 
   Scenario: workspace can be edited from projects section.
 

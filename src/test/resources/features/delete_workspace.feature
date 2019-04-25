@@ -7,6 +7,7 @@ Feature: Deletion of workspaces
     And stores response as "workspace_response"
     And logs in with user "owner1"
     And Go to Dashboard
+      | tab | workspace |
 
   Scenario: Workspace can be deleted from projects section.
 
