@@ -26,6 +26,13 @@ public class ApiSteps {
      */
     @Given("sends a POST request {string}")
     public void sendsAPOSTRequest(final String endpoint,
+                                  final Map<String, String> param) {
+        final String builtEndpoint = StringUtil.getExplicitEndpoint(endpoint);
+        this.resp = RequestManager.postRequest(builtEndpoint, param);
+    }
+
+    @Given("sends a POST request {string} with json")
+    public void sendsAPOSTRequest(final String endpoint,
                                   final String json) {
         final String builtEndpoint = StringUtil.getExplicitEndpoint(endpoint);
         this.resp = RequestManager.postRequest(builtEndpoint, json);

@@ -1,4 +1,3 @@
-@wip
 Feature: Story
   This feature file contains scenarios to create story.
 
@@ -6,12 +5,12 @@ Feature: Story
     Given sends a POST request "/projects"
       | name | a1 |
     And stores response as "project_response"
+    And logs in with user "owner1"
 
   Scenario: creates a story with the minimum required field
-    Given logs in with user "owner1"
-    And goes to Dashboard "project"
+    When goes to Dashboard "project"
     And opens a project "project_response.name"
-    When clicks on add story button
+    And clicks on add story button
     And creates a story with:
       | name | carlos test |
     Then verifies the story is created in panel
@@ -28,7 +27,6 @@ Feature: Story
     And verifies the story count for project "project_response.name" is equal "1" in  project list
 
   Scenario: creates a story with the all possible fields
-    Given logs in with user "owner1"
     And goes to Dashboard "project"
     And opens a project "project_response.name"
     When clicks on add story button
