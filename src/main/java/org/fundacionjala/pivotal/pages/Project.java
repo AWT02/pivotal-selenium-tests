@@ -65,14 +65,14 @@ public class Project extends AbstractPage {
      */
     public void setProjectNameTextField(final String strProjectName) {
         this.projectName = strProjectName;
-        action.setValue(projectNameField, strProjectName);
+        this.action.setValue(this.projectNameField, strProjectName);
     }
 
     /**
      * Open account list.
      **/
     public void openSelectAccountCombobox() {
-        action.click(accountSelector);
+        this.action.click(this.accountSelector);
     }
 
     /**
@@ -82,16 +82,16 @@ public class Project extends AbstractPage {
      */
     public void selectAccount(final String accountName) {
         openSelectAccountCombobox();
-        final boolean onListAccount = action.isExistingSelector(
+        final boolean onListAccount = this.action.isExistingSelector(
                 By.xpath("//div[text()='" + accountName + "']"));
 
         if (!onListAccount) {
-            action.click(createAccount);
+            this.action.click(this.createAccount);
             createAccount(accountName);
         } else {
-            final WebElement accountSelectorByName = driver.findElement(
+            final WebElement accountSelectorByName = this.driver.findElement(
                     By.xpath("//div[text()='" + accountName + "']"));
-            action.click(accountSelectorByName);
+            this.action.click(accountSelectorByName);
         }
     }
 
@@ -101,7 +101,7 @@ public class Project extends AbstractPage {
      * @param accountName name of the new account
      */
     private void createAccount(final String accountName) {
-        action.setValue(newAccountField, accountName);
+        this.action.setValue(this.newAccountField, accountName);
     }
 
     /**
@@ -112,8 +112,8 @@ public class Project extends AbstractPage {
          * This is a Workaround.
          * this need to be reviewed in the last selenium version. action.staleElement(backDrop);
          */
-        this.action.click(createButton);
-        action.pause(W_TIME);
+        this.action.click(this.createButton);
+        this.action.pause(W_TIME);
     }
 
     /**
@@ -145,9 +145,9 @@ public class Project extends AbstractPage {
      * @param privacy option public or private
      */
     public void selectProjectPrivacy(final String privacy) {
-        final WebElement accountPrivacyOption = driver.findElement(
+        final WebElement accountPrivacyOption = this.driver.findElement(
                 By.xpath("//input[@type='radio' and @data-aid='" + privacy + "']"));
-        action.click(accountPrivacyOption);
+        this.action.click(accountPrivacyOption);
     }
 
     /**
@@ -172,22 +172,22 @@ public class Project extends AbstractPage {
      * Delete through link option.
      */
     public void clickOnDeleteProjectLink() {
-        action.scrollToElement(deleteLink);
-        action.click(deleteLink);
+        this.action.scrollToElement(this.deleteLink);
+        this.action.click(this.deleteLink);
     }
 
     /**
      * Confirm deletion.
      */
     public void clickOnDeleteButton() {
-        action.click(confirmDelete);
+        this.action.click(this.confirmDelete);
     }
 
     /**
      * Click to save button on edit project form.
      */
     public void saveFormOnEditProject() {
-        action.click(saveButtonOnEditProject);
+        this.action.click(this.saveButtonOnEditProject);
     }
 
     /**
@@ -196,7 +196,7 @@ public class Project extends AbstractPage {
      * @return Boolean if message was displayed
      */
     public boolean getResponseMessage() {
-        return successBar.isDisplayed();
+        return this.successBar.isDisplayed();
     }
 
     /**
@@ -214,14 +214,28 @@ public class Project extends AbstractPage {
      * @return String with message
      */
     public String getMessageOnNewProjectForm() {
-        action.waitVisibility(errorMessage);
-        return errorMessage.getText();
+        this.action.waitVisibility(this.errorMessage);
+        return this.errorMessage.getText();
     }
 
     /**
      * Click through plus new project option.
      */
     public void clickCreateNewPRojectOption() {
-        action.click(plusNewProjectOption);
+        this.action.click(this.plusNewProjectOption);
+    }
+
+    /**
+     * This method open memembers tab.
+     *
+     * @param projectId in project id.
+     */
+    public void opensMemebersTab(final int projectId) {
+        final WebElement memebersTab = this.driver.findElement(
+                By.cssSelector("a[href='/projects/"
+                        .concat(String.valueOf(projectId))
+                        .concat("/memberships']"))
+        );
+        this.action.click(memebersTab);
     }
 }
