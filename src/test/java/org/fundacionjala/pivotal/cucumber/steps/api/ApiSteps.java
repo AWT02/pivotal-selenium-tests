@@ -1,16 +1,17 @@
 package org.fundacionjala.pivotal.cucumber.steps.api;
 
+import java.util.Map;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import io.restassured.response.Response;
-import org.fundacionjala.core.api.RequestManager;
-import org.fundacionjala.util.ScenarioContext;
-import org.fundacionjala.util.StringUtil;
 
-import java.util.Map;
+import org.fundacionjala.core.api.RequestManager;
+import org.fundacionjala.core.util.ScenarioContext;
+import org.fundacionjala.core.util.StringUtil;
 
 /**
- * Common steps.
+ * Api steps.
  */
 public class ApiSteps {
 

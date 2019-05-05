@@ -1,43 +1,35 @@
 package org.fundacionjala.pivotal.cucumber.steps.ui;
 
-import cucumber.api.java.After;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import org.apache.log4j.Logger;
-import org.fundacionjala.core.Environment;
-import org.fundacionjala.core.api.RequestManager;
-import org.fundacionjala.core.ui.forms.FormsElements;
-import org.fundacionjala.pivotal.pages.Dashboard;
-import org.fundacionjala.pivotal.pages.DeleteModal;
-import org.fundacionjala.pivotal.pages.HeaderContainer;
-import org.fundacionjala.pivotal.pages.ISteps;
-import org.fundacionjala.pivotal.pages.Panel;
-import org.fundacionjala.pivotal.pages.Project;
-import org.fundacionjala.pivotal.pages.ProjectWorkspaceList;
-import org.fundacionjala.pivotal.pages.Story;
-import org.fundacionjala.util.ScenarioContext;
-import org.fundacionjala.util.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
+
+import org.fundacionjala.core.ui.forms.FormsElements;
+import org.fundacionjala.core.util.Environment;
+import org.fundacionjala.core.util.ScenarioContext;
+import org.fundacionjala.core.util.StringUtil;
+import org.fundacionjala.pivotal.pages.ISteps;
+import org.fundacionjala.pivotal.pages.common.DeleteModal;
+import org.fundacionjala.pivotal.pages.common.HeaderContainer;
+import org.fundacionjala.pivotal.pages.project.Panel;
+import org.fundacionjala.pivotal.pages.project.ProjectWorkspaceList;
+import org.fundacionjala.pivotal.pages.project.Story;
+
 /**
  * this is an story steps.
  */
 public class StorySteps {
-    private static final Logger LOGGER =
-            Logger.getLogger(StorySteps.class.getName());
-    private final String allFields = "all_story_fields";
-    @Autowired
-    private Project project;
+
+    private static final String ALL_STORY_FIELDS = "all_story_fields";
+
     @Autowired
     private ProjectWorkspaceList projectList;
-    @Autowired
-    private Dashboard dashboard;
     @Autowired
     private Story story;
     @Autowired
@@ -114,8 +106,7 @@ public class StorySteps {
     /** This step verifies that story appears in panel. **/
     @Then("verifies the story is created in panel")
     public void verifiesTheStoryIsCreatedInPanel() {
-        final String storyName = ScenarioContext
-                .getContextInMapAsString(this.allFields, "name");
+        final String storyName = ScenarioContext.getInstance().getContextInMapAsString(ALL_STORY_FIELDS, "name");
         Assert.assertTrue(this.panel.existStory(storyName));
     }
 
@@ -162,7 +153,7 @@ public class StorySteps {
     @When("creates a story with:")
     public void createsAStoryWith(final Map<String, String> attributes) {
         this.story.createStory(attributes);
-        ScenarioContext.getInstance().setContext(this.allFields, attributes);
+        ScenarioContext.getInstance().setContext(ALL_STORY_FIELDS, attributes);
     }
 
     /**
@@ -176,17 +167,6 @@ public class StorySteps {
         final String projectName = StringUtil.getValue(projectNameKey);
         final String amount = this.projectList.getAmountOfStories(projectName);
         Assert.assertEquals(amount, expectedCount);
-    }
-
-    /** After hook that delete project created in the background steps. **/
-    @After
-    public void after() {
-        try {
-            final String url = StringUtil.getExplicitEndpoint("/projects/{project_response.id}");
-            RequestManager.deleteRequest(url);
-        } catch (final Exception e) {
-            LOGGER.warn("After hook for story steps doesn't run");
-        }
     }
 
     /** This step clicks on add story button. **/

@@ -1,25 +1,24 @@
 package org.fundacionjala.pivotal.cucumber.steps.ui;
 
+import java.util.Map;
+
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.log4j.Logger;
-import org.fundacionjala.core.api.services.ProjectService;
-import org.fundacionjala.core.api.services.StoryService;
-import org.fundacionjala.core.ui.forms.FormsElements;
-import org.fundacionjala.pivotal.pages.Dashboard;
-import org.fundacionjala.pivotal.pages.Project;
-import org.fundacionjala.pivotal.pages.Tasks;
-import org.fundacionjala.pivotal.pages.ToastMessage;
-import org.fundacionjala.util.ScenarioContext;
-import org.fundacionjala.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
-import java.util.Map;
+import org.fundacionjala.core.api.RequestManager;
+import org.fundacionjala.core.ui.forms.FormsElements;
+import org.fundacionjala.core.util.ScenarioContext;
+import org.fundacionjala.core.util.StringUtil;
+import org.fundacionjala.pivotal.pages.common.Dashboard;
+import org.fundacionjala.pivotal.pages.common.ToastMessage;
+import org.fundacionjala.pivotal.pages.project.Project;
+import org.fundacionjala.pivotal.pages.project.Tasks;
 
 
 /**
@@ -43,27 +42,8 @@ public class TaskSteps {
     @Autowired
     private ToastMessage toastMessage;
 
-    /**
-     * Step to set default project with story.
-     **/
-    @And("Project with one story")
-    public static void projectWithOneStory() {
-        final int id = ProjectService.createProject("My test project");
-        ScenarioContext.getInstance().setContext("defaultProjectId", id);
-        final int taskId = StoryService.createStory(id, "Task test");
-        ScenarioContext.getInstance().setContext("defaultTaskId", taskId);
-    }
-
-    /**
-     * Before steps for every feature.
-     *
-     * @param scenario Scenario
-     **/
-    @Before
-    public static void before(final Scenario scenario) {
-        LOGGER.info(String.format("@Before %s  Status - %s", scenario.getName(),
-                scenario.getStatus()));
-    }
+    private static final String BASE_URL = ScenarioContext.getInstance().getContextAsString(ScenarioContext.API_URL_KEY)
+                    .concat("/projects/");
 
     /**
      * After steps for every feature.
@@ -71,12 +51,12 @@ public class TaskSteps {
      * @param scenario Scenario
      */
     @After("@DeleteProject")
-    public static void after(final Scenario scenario) {
+    public void after(final Scenario scenario) {
         LOGGER.info(String.format("@After.1 %s  Status - %s", scenario.getName(),
                 scenario.getStatus()));
         final int projectId = (Integer) ScenarioContext.getInstance()
                 .getContext("defaultProjectId");
-        ProjectService.deleteProject(projectId);
+        RequestManager.deleteRequest(BASE_URL + projectId);
         LOGGER.info(String.format("@After.2 %s  Status - %s", scenario.getName(),
                 scenario.getStatus()));
     }
@@ -99,8 +79,7 @@ public class TaskSteps {
      */
     @Then("validates task aggregation")
     public void verifyTheTaskWasAdded() {
-        final String text = (String) ScenarioContext
-                .getContextAsString(TASK_NAME);
+        final String text = ScenarioContext.getInstance().getContextAsString(TASK_NAME);
         Assert.assertTrue(this.tasksPanel.existTask(text));
     }
 
@@ -111,8 +90,7 @@ public class TaskSteps {
      **/
     @When("edits the task name")
     public void editTaskName(final Map<String, String> taskAttributes) {
-        final String text = (String) ScenarioContext
-                .getContextAsString(TASK_NAME);
+        final String text = ScenarioContext.getInstance().getContextAsString(TASK_NAME);
         this.tasksPanel.selectTask(text);
         this.tasksPanel.setTaskEditText(taskAttributes.get(FormsElements.NAME.toString()));
         this.tasksPanel.clickOnSave();
@@ -124,9 +102,7 @@ public class TaskSteps {
      */
     @Then("the old task should not be listed")
     public void verifyThatTaskNotListed() {
-        Assert.assertFalse(this.tasksPanel.existTask((String) ScenarioContext
-                .getContextAsString(TASK_NAME)));
-
+        Assert.assertFalse(this.tasksPanel.existTask(ScenarioContext.getInstance().getContextAsString(TASK_NAME)));
     }
 
     /**

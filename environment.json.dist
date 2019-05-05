@@ -2,7 +2,7 @@
   "credentials": {
     "owner1": {
       "username": "",
-      "password": ""
+      "password": "",
       "apiToken": ""
     },
     "member1": {

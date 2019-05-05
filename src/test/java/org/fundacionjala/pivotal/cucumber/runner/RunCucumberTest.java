@@ -2,10 +2,11 @@ package org.fundacionjala.pivotal.cucumber.runner;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-import org.fundacionjala.core.Environment;
-import org.fundacionjala.core.ui.driver.DriverManager;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+
+import org.fundacionjala.core.ui.driver.DriverManager;
+import org.fundacionjala.core.util.Environment;
 
 /**
  * Class which runs all features.

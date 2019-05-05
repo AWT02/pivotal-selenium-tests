@@ -1,8 +1,9 @@
 package org.fundacionjala.core.ui.driver;
 
-import org.fundacionjala.core.Environment;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.fundacionjala.core.util.Environment;
 
 /**
  * Webdriver singleton pattern.

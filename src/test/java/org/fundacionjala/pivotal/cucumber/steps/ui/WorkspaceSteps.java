@@ -1,22 +1,21 @@
 package org.fundacionjala.pivotal.cucumber.steps.ui;
 
+import java.util.Map;
+import java.util.NoSuchElementException;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.apache.log4j.Logger;
-import org.fundacionjala.core.api.services.WorkSpaceService;
-import org.fundacionjala.core.ui.forms.FormsElements;
-import org.fundacionjala.pivotal.pages.ConfirmAction;
-import org.fundacionjala.pivotal.pages.Dashboard;
-import org.fundacionjala.pivotal.pages.Header;
-import org.fundacionjala.pivotal.pages.WorkSpaceNew;
-import org.fundacionjala.pivotal.pages.WorkSpaceSettings;
-import org.fundacionjala.util.ScenarioContext;
-import org.fundacionjala.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Map;
-import java.util.NoSuchElementException;
+import org.fundacionjala.core.ui.forms.FormsElements;
+import org.fundacionjala.core.util.ScenarioContext;
+import org.fundacionjala.core.util.StringUtil;
+import org.fundacionjala.pivotal.pages.common.ConfirmAction;
+import org.fundacionjala.pivotal.pages.common.Dashboard;
+import org.fundacionjala.pivotal.pages.workspace.WorkSpaceNew;
+import org.fundacionjala.pivotal.pages.workspace.WorkSpaceSettings;
 
 /**
  * This class will have steps for workspace feature.
@@ -28,9 +27,6 @@ public class WorkspaceSteps {
             Logger.getLogger(WorkspaceSteps.class.getName());
     @Autowired
     private Dashboard dashboard;
-
-    @Autowired
-    private Header header;
 
     @Autowired
     private WorkSpaceNew workSpaceNew;
@@ -48,7 +44,7 @@ public class WorkspaceSteps {
      * @param strname param.
      **/
     @And("edit workspace’s title")
-    public static void setWorkSpacename(final String strname) {
+    public void setWorkSpacename(final String strname) {
 
         final WorkSpaceSettings settingsPage =
                 (WorkSpaceSettings) ScenarioContext.getInstance().getContext(
@@ -61,23 +57,12 @@ public class WorkspaceSteps {
      * This step save workspace.
      **/
     @And("clicks on Save Button")
-    public static void clickSaveButton() {
+    public void clickSaveButton() {
         final WorkSpaceSettings settingsPage =
                 (WorkSpaceSettings) ScenarioContext.getInstance().getContext(
                         WS_SETTINGS_PAGE);
         settingsPage.clickOnSave();
 
-    }
-
-    /**
-     * This step create a workspace.
-     **/
-    @Given("create an workspace")
-    public static void createaworkspace() {
-        final String name = "My WorkSpace Test";
-        final int workspaceId = WorkSpaceService.createWorkspace(name);
-        ScenarioContext.getInstance().setContext(WS_NAME, name);
-        ScenarioContext.getInstance().setContext("ws_id", workspaceId);
     }
 
     /**

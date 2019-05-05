@@ -1,28 +1,28 @@
 package org.fundacionjala.pivotal.cucumber.steps.ui;
 
-import cucumber.api.java.Before;
+import java.util.List;
+import java.util.Map;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.fundacionjala.core.api.RequestManager;
-import org.fundacionjala.pivotal.pages.ConfirmAction;
-import org.fundacionjala.pivotal.pages.Dashboard;
-import org.fundacionjala.pivotal.pages.Header;
-import org.fundacionjala.pivotal.pages.HeaderMenu;
-import org.fundacionjala.pivotal.pages.Project;
-import org.fundacionjala.pivotal.pages.ProjectSettings;
-import org.fundacionjala.pivotal.pages.ProjectWorkspaceList;
-import org.fundacionjala.pivotal.pages.SavePanelProjectSettings;
-import org.fundacionjala.util.ScenarioContext;
-import org.fundacionjala.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
-import java.util.List;
-import java.util.Map;
+import org.fundacionjala.core.api.RequestManager;
+import org.fundacionjala.core.util.ScenarioContext;
+import org.fundacionjala.core.util.StringUtil;
+import org.fundacionjala.pivotal.pages.common.ConfirmAction;
+import org.fundacionjala.pivotal.pages.common.Dashboard;
+import org.fundacionjala.pivotal.pages.common.Header;
+import org.fundacionjala.pivotal.pages.common.HeaderMenu;
+import org.fundacionjala.pivotal.pages.project.Project;
+import org.fundacionjala.pivotal.pages.project.ProjectSettings;
+import org.fundacionjala.pivotal.pages.project.ProjectWorkspaceList;
+import org.fundacionjala.pivotal.pages.project.SavePanelProjectSettings;
 
 /**
  * Project steps.
@@ -250,14 +250,6 @@ public class ProjectSteps {
     @And("set {string}")
     public void set(final String keyContext) {
         ScenarioContext.getInstance().setContext(keyContext, this.resp);
-    }
-
-    /**
-     * this is a hook.
-     */
-    @Before
-    public void setup() {
-        loadAllProjectIdsInContext();
     }
 
     /**
