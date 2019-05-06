@@ -1,21 +1,18 @@
 package org.fundacionjala.core.util;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /** This class represent scenario context. **/
 public final class ScenarioContext {
+    public static final String API_URL_KEY = "url.api";
     private static final Logger LOGGER =
             Logger.getLogger(ScenarioContext.class.getName());
-
-    private final Map<String, Object> context;
-
-    public static final String API_URL_KEY = "url.api";
-
     private static final ScenarioContext INSTANCE = new ScenarioContext();
+    private final Map<String, Object> context;
 
     /** Default constructor. **/
     private ScenarioContext() {
@@ -43,6 +40,16 @@ public final class ScenarioContext {
     }
 
     /**
+     * This method get context string value for key.
+     *
+     * @param key string
+     * @return object value.
+     */
+    public String getContextAsString(final String key) {
+        return INSTANCE.context.get(key).toString();
+    }
+
+    /**
      * Set an element in context.
      *
      * @param key   string key
@@ -65,17 +72,7 @@ public final class ScenarioContext {
     /**
      * This method get context string value for key.
      *
-     * @param key string
-     * @return object value.
-     */
-    public String getContextAsString(final String key) {
-        return context.get(key).toString();
-    }
-
-    /**
-     * This method get context string value for key.
-     *
-     * @param key key in the context.
+     * @param key    key in the context.
      * @param mapKey key in the map.
      * @return object value.
      */

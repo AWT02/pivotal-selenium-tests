@@ -10,11 +10,16 @@ Feature: Project
       | name    | at-01   |
       | account | one     |
       | privacy | private |
-    And get project id
-    And set "project_id"
-    Then validates "at-01" name on project's header title
-    And validate creation on header project's list
-    And validate creation on project's section
+    And stores datatable as "project_datatable"
+    Then validates "project_datatable.name" name on project's header title
+    And opens the popover from header title
+    And verifies that "project_datatable.name" appears on "Projects" group list
+    And goes to dashboard "Projects"
+    And verifies that "project_datatable.name" appears on dashboard tab
+    And opens the popover from header title
+    And clicks show all projects
+    And verifies that project "project_datatable.name" appears on project list
+    And stores "project_id" that matches with "project_datatable.name" from "/projects"
     And sends a DELETE request "/projects/{project_id}"
 
   Scenario: Create new project from header menu
@@ -22,12 +27,18 @@ Feature: Project
     When creates project as
       | name    | at-02 |
       | account | two   |
-    And get project id
-    And set "project_id"
-    Then validates "at-02" name on project's header title
-    And validate creation on header project's list
-    And validate creation on project's section
+    And stores datatable as "project_datatable"
+    Then validates "project_datatable.name" name on project's header title
+    And opens the popover from header title
+    And verifies that "project_datatable.name" appears on "Projects" group list
+    And goes to dashboard "Projects"
+    And verifies that "project_datatable.name" appears on dashboard tab
+    And opens the popover from header title
+    And clicks show all projects
+    And verifies that project "project_datatable.name" appears on project list
+    And stores "project_id" that matches with "project_datatable.name" from "/projects"
     And sends a DELETE request "/projects/{project_id}"
+
 
   Scenario: Create new project from project's section
     Given An option to create a new project on project's section
@@ -35,9 +46,14 @@ Feature: Project
       | name    | at-03   |
       | account | three   |
       | privacy | private |
-    And get project id
-    And set "project_id"
-    Then validates "at-03" name on project's header title
-    And validate creation on header project's list
-    And validate creation on project's section
+    And stores datatable as "project_datatable"
+    Then validates "project_datatable.name" name on project's header title
+    And opens the popover from header title
+    And verifies that "project_datatable.name" appears on "Projects" group list
+    And goes to dashboard "Projects"
+    And verifies that "project_datatable.name" appears on dashboard tab
+    And opens the popover from header title
+    And clicks show all projects
+    And verifies that project "project_datatable.name" appears on project list
+    And stores "project_id" that matches with "project_datatable.name" from "/projects"
     And sends a DELETE request "/projects/{project_id}"

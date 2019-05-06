@@ -11,9 +11,6 @@ public class Assert {
 
     private Assertion assertion;
 
-    /**
-     * Constructor.
-     */
     public Assert() {
         assertion = new Assertion();
     }
@@ -27,7 +24,7 @@ public class Assert {
     }
 
     /**
-     * Sets assertion instance.
+     * Sets assertion instance
      * @param assertion {@link Assertion}
      */
     public void setAssertion(final Assertion assertion) {
