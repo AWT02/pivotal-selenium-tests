@@ -226,4 +226,18 @@ public class Project extends AbstractPage {
     public void clickCreateNewPRojectOption() {
         action.click(plusNewProjectOption);
     }
+
+    /**
+     * This method open members tab.
+     *
+     * @param projectId in project id.
+     */
+    public void opensMembersTab(final int projectId) {
+        final WebElement membersTab = this.driver.findElement(
+                By.cssSelector("a[href='/projects/"
+                        .concat(String.valueOf(projectId))
+                        .concat("/memberships']"))
+        );
+        this.action.click(membersTab);
+    }
 }
